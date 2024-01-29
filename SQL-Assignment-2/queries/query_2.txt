@@ -1,0 +1,24 @@
+with number_of_languages_CTE as (
+	select
+		count(l.language) as number_of_languages
+	from
+		languages as l
+	group by
+		l.country
+)
+
+
+select distinct
+	e.poverty
+from
+	economies as e
+where
+	e.country in (
+		select
+			l.country
+		from
+			languages as l
+		group by
+			l.country
+		having
+			count(l.language) = (select max(number_of_languages) from number_of_languages_CTE))

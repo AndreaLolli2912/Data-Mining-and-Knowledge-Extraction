@@ -1,0 +1,49 @@
+WITH GDP_Increase_CTE AS (
+    SELECT
+	e.country,
+	(CAST(e.gdp * e.military AS REAL) / 100) AS gdp_increase
+    FROM
+	economies AS e
+)
+
+SELECT 
+    gdp_increase,
+    country
+FROM (
+    SELECT
+	gdp_increase,
+	c.name as country
+    FROM
+	GDP_Increase_CTE
+		join countries as c on c.code = GDP_Increase_CTE.country
+    WHERE
+	gdp_increase = (SELECT MAX(gdp_increase) FROM GDP_Increase_CTE)
+
+    UNION
+
+    SELECT
+	gdp_increase,
+	c.name as country
+    FROM
+	GDP_Increase_CTE
+		join countries as c on c.code = GDP_Increase_CTE.country
+    WHERE
+	gdp_increase = (SELECT MIN(gdp_increase) FROM GDP_Increase_CTE)
+
+    UNION
+
+    SELECT
+	AVG(gdp_increase) AS gdp_increase,
+	NULL AS country
+    FROM
+	GDP_Increase_CTE
+	) AS result_set
+		
+ORDER BY
+    CASE
+	WHEN gdp_increase = (SELECT MAX(gdp_increase) FROM GDP_Increase_CTE) THEN 1
+	WHEN gdp_increase = (SELECT MIN(gdp_increase) FROM GDP_Increase_CTE) THEN 2
+	ELSE 3
+    END,
+	country;
+

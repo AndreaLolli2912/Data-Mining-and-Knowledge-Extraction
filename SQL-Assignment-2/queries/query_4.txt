@@ -1,0 +1,17 @@
+with population_decline_CTE as (
+	select
+		(p.death_rate - p.birth_rate) as population_decline
+	from 
+		populations as p
+	where
+		p.death_rate > p.birth_rate
+)	
+
+select distinct
+	c.code
+from 
+	countries as c
+	join populations as p on c.code = p.country
+where
+	p.death_rate - p.birth_rate = (select max(population_decline) from population_decline_CTE)
+	

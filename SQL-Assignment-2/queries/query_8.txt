@@ -1,0 +1,15 @@
+select distinct
+	l.language,
+	avg(p.adult) as average_percentage_adult_population
+from 
+	languages as l
+join
+	populations as p on l.country = p.country 
+where 
+	l.percentage >= 25
+group by
+	l.language
+order by 
+	 average_percentage_adult_population desc,
+	 l.language 
+

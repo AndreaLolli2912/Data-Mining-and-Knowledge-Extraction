@@ -1,0 +1,10 @@
+select distinct
+	c.code,
+	c.area
+from
+	countries as c
+order by
+	c.area desc,
+	c.code
+offset 14
+limit 1

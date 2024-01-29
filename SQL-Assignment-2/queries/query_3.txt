@@ -1,0 +1,17 @@
+select distinct
+	l.country as country
+from
+	languages as l
+	join economies as e on l.country = e.country
+where 
+	l.language = 'English' 
+	and l.percentage > 50
+	and e.poverty > all (
+		select
+			e.poverty
+		from 
+			economies as e
+		 where
+			e.country = 'USA'
+)
+

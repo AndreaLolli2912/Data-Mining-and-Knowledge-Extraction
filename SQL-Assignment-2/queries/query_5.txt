@@ -1,0 +1,17 @@
+with world_population_CTE as (
+	select
+		cast(sum(p.population) as real) as world_population
+	from 
+		populations as p
+)
+
+
+select distinct
+	l.language,
+	(sum(p.population * (cast(l.percentage * 0.01 as real))) / (select world_population from world_population_CTE)) * 100 as word_perc
+from 
+	languages as l
+join 
+	populations as p on l.country = p.country
+group by
+	l.language

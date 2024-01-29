@@ -1,0 +1,16 @@
+with sex_ratio_CTE as (
+	select
+		p.sex_ratio sex_ratio
+	from
+		populations as p
+)
+
+select distinct
+	l.language as dominant_language,
+	l.country as country
+from 
+	populations as p 
+	join languages as l on p.country = l.country
+where
+	p.sex_ratio = (select max(sex_ratio) from sex_ratio_CTE)
+	and l.percentage > 50

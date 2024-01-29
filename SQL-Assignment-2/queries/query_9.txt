@@ -1,0 +1,15 @@
+with GDP_C_COUNTRIES_CTE as(
+	select
+		e.gdp as C_GDP
+	from
+		economies as e
+	where
+		e.country like 'C%')
+		
+select distinct
+	e.country
+from
+	economies as e
+where
+	e.country like 'C%'
+	and e.gdp = (select max(C_GDP) from GDP_C_COUNTRIES_CTE)
