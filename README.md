@@ -1,8 +1,8 @@
-# Final Project: Data Mining and Data Warehouses
+# Final Project: Data Mining and Knowledge Extraction
 
 ## Project Description
 
-This final project for the course "Data Mining and Data Warehouses" comprised three main assignments, each focusing on different aspects of data management and analysis. The projects involved designing a relational database, writing complex SQL queries, and creating a data warehouse schema to support analytical operations.
+This final project for the course "Data Mining and Knowledge Extraction" comprised three main assignments, each focusing on different aspects of data management and analysis. The projects involved designing a relational database, writing complex SQL queries, and creating a data warehouse schema to support analytical operations.
 
 ### Project 1: Relational Database Design for the National Library
 - **Objective:** Design a relational database for the National Library to efficiently manage and organize vast amounts of information related to books, authors, customers, employees, and transactions.
